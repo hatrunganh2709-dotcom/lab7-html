@@ -1,0 +1,24 @@
+name: Deploy HTML to somee
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lay source code
+        uses: actions/checkout@v4
+
+      - name: Deploy qua FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /www.hatrunganhdh52300034.somee.com/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
